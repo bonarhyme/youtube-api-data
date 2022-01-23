@@ -31,7 +31,7 @@ channelForm2.addEventListener("submit", (e) => {
 
   const channel = channelInput.value;
 
-  getChannel(channel);
+  getChannel(null, channel);
 });
 
 // Load auth2 library
@@ -90,11 +90,11 @@ function showChannelData(data) {
 }
 
 // Get channel from API
-function getChannel(channel) {
+function getChannel(channel, id) {
   gapi.client.youtube.channels
     .list({
       part: "snippet,contentDetails,statistics",
-      id: channel,
+      id: id,
       forUsername: channel,
     })
     .then((response) => {
