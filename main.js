@@ -10,7 +10,6 @@ const authorizeButton = document.getElementById("authorize-button");
 const signoutButton = document.getElementById("signout-button");
 const content = document.getElementById("content");
 const channelForm = document.getElementById("channel-form");
-const channelForm2 = document.getElementById("channel-form-2");
 const channelInput = document.getElementById("channel-input");
 const videoContainer = document.getElementById("video-container");
 
@@ -23,15 +22,6 @@ channelForm.addEventListener("submit", (e) => {
   const channel = channelInput.value;
 
   getChannel(channel);
-});
-
-// Form submit and change channel
-channelForm2.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const channel = channelInput.value;
-
-  getChannel(null, channel);
 });
 
 // Load auth2 library
@@ -90,12 +80,11 @@ function showChannelData(data) {
 }
 
 // Get channel from API
-function getChannel(channel, id) {
+function getChannel(channel) {
   gapi.client.youtube.channels
     .list({
       part: "snippet,contentDetails,statistics",
-      id: id,
-      forUsername: channel,
+      id: channel,
     })
     .then((response) => {
       console.log(response);
