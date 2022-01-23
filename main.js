@@ -10,6 +10,7 @@ const authorizeButton = document.getElementById("authorize-button");
 const signoutButton = document.getElementById("signout-button");
 const content = document.getElementById("content");
 const channelForm = document.getElementById("channel-form");
+const channelForm2 = document.getElementById("channel-form-2");
 const channelInput = document.getElementById("channel-input");
 const videoContainer = document.getElementById("video-container");
 
@@ -17,6 +18,15 @@ const defaultChannel = "UCPT421nhI8h1nJ5vIIZ7M9A";
 
 // Form submit and change channel
 channelForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const channel = channelInput.value;
+
+  getChannel(channel);
+});
+
+// Form submit and change channel
+channelForm2.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const channel = channelInput.value;
@@ -85,6 +95,7 @@ function getChannel(channel) {
     .list({
       part: "snippet,contentDetails,statistics",
       id: channel,
+      forUsername: channel,
     })
     .then((response) => {
       console.log(response);
